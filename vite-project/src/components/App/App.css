@@ -108,8 +108,10 @@
   height: 33px;
   border-bottom: 1px solid var(--lap-btn-bg-color);
   font-size: 17px;
-  font-weight: 30;
+  font-weight: 400;
+  color: white;
 }
+
 .lap-table {
   width: 100%;
 }
