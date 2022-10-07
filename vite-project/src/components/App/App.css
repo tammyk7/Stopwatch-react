@@ -1,0 +1,99 @@
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+:root {
+  --bg-color: #000000;
+  --start-btn-bg-color: rgba(48, 209, 88, 0.2);
+  --start-btn-text-color: rgb(48, 209, 88);
+  --start-btn-active-color: rgba(48, 209, 88, 0.1);
+  --stop-btn-bg-color: rgba(255, 69, 58, 0.2);
+  --stop-btn-text-color: rgb(255, 69, 58);
+  --stop-btn-active-color: rgba(255, 69, 58, 0.15);
+  --reset-btn-bg-color: #49494c;
+  --reset-btn-text-color: #fff;
+  --reset-btn-active-color: #222223;
+  --lap-btn-bg-color: rgba(73, 73, 76, 0.5);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.main {
+  height: 812px;
+  width: 375px;
+  background: #101010;
+  color: #E5E9F0;
+  text-align: center;
+  font-weight: 100;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 79px;
+  font-weight: 200px;
+  height: 150px;
+  margin-top: 117px;
+  margin-bottom: 20px;
+  font-variant: tabular-nums;
+}
+
+.button-container {
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.round-button {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  outline: 1px solid black;
+  outline-offset: -3px;
+}
+
+.round-button:focus {
+  outline: none;
+  outline: 1px solid black;
+  outline-offset: -3px;
+}
+
+.lap-button {
+  background-color: var(--lap-btn-bg-color);
+} 
+
+.start-button {
+  background-color: var(--start-btn-bg-color);
+  color: var(--start-btn-text-color);
+}
+
+.reset-button {
+  background-color: var(--reset-btn-bg-color);
+  color: var(--reset-btn-text-color);
+}
+
+.stop-button {
+  background-color: var(--stop-btn-bg-color);
+  color: var(--stop-btn-text-color);
+}
+
