@@ -27,6 +27,7 @@ const lapResetButtonAction = () => {
     resetTimer()
   }
 } 
+
 const lapResetButtonText = () => {
   if (time === 0) {
     return 'Lap'
