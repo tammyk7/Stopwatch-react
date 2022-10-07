@@ -11,8 +11,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 const component = (
   <div>
-    <span></span>
-    'Hello world'
   </div>
 )
 
