@@ -4,40 +4,54 @@ import './App.css'
 
 function App() {
 
-const [time, setTime] = useState(0)
+const [elapsedTime, setElapsedTime] = useState(0)
 const [isRunning, setIsRunning] = useState(false)
+const [lapData, setLapData] = useState({
+  laps: [{lapNumber: 0, lapTime: 0}],
+  totalLapTime: 0,
+  minLap: [],
+  maxLap: []
+})
 
 useEffect(() => {
-  let interval;
   if (isRunning) {
-    let startTime = Date.now() - time
-    interval = setInterval(() => {setTime(() => setTime(Date.now() - startTime))}, 10);
-    return () => clearInterval(interval)}},[isRunning]);
+    const startTime = Date.now() - elapsedTime
+    const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10)
+    return () => clearInterval(interval)
+  }
+}, [isRunning])
 
-const startStopButtonText = isRunning ? 'Stop' : 'Start';
-const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
-const startStopbuttonAction = () => {
-  setIsRunning(!isRunning)
+// useEffect(() => {
+//   // update running lap
+//   // lapData.laps = []
+// }, [elapsedTime])
+
+// setLapData(prevLapData => ({
+//   ...prevLapData,
+//   laps: [ 34, ...prevLapData.laps, 323, 45],
+//   totalLapTime: elapsedTime - lapData.laps[...]
+
+// }))
+
+const firstLap = () => {
+  setLapData(prevLapData => ({
+    ...prevLapData,
+    laps: [...prevLapData.laps[0]],
+    totalLapTime: elapsedTime,
+  }))
 }
+// console.log(lapData)
 
-const resetTimer = () => setTime(0)
+const startStopButtonText = isRunning ? 'Stop' : 'Start'
+const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
+const lapResetButtonText = (isRunning || elapsedTime === 0) ? 'Lap' : 'Reset'
+const toggleTimer = () => setIsRunning(!isRunning)
+const lapResetButtonAction = () => (lapResetButtonText === 'Reset') ? resetTimer() : firstLap()
+const isLapButtonDisabled = !isRunning && elapsedTime === 0
 
-const lapResetButtonAction = () => {
-  if (lapResetButtonText.innerText = 'Reset') {
-    resetTimer()
-  }
-} 
-
-const lapResetButtonText = () => {
-  if (time === 0) {
-    return 'Lap'
-  }
-  if (isRunning) {
-    return 'Lap'
-  }
-  else {
-    return 'Reset'
-  }
+const resetTimer = () => {
+  setIsRunning(false)
+  setElapsedTime(0)
 }
 
 return (
@@ -45,15 +59,16 @@ return (
     <div className="wrapper">
       <div className="main">
         <div className="timer-container">
-          <span id="timer">{formatTime(time)}</span>
+          <span id="timer">{formatTime(elapsedTime)}</span>
         </div>
         <div className="button-container">
           <button className="round-button lap-button" 
-                  id="lapResetButton"
-                  onClick={lapResetButtonAction}>{lapResetButtonText()}</button> 
+                  id="lapResetButton" 
+                  onClick={lapResetButtonAction}
+                  disabled={isLapButtonDisabled}>{lapResetButtonText}</button> 
           <button className={startStopButtonColor} 
                   id="startStopButton" 
-                  onClick={startStopbuttonAction}>{startStopButtonText}</button>
+                  onClick={toggleTimer}>{startStopButtonText}</button>
         </div>
         <div className="lap-table-container">
           <table className='lap-table 'id="lapTable">

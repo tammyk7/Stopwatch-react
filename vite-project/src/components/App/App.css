@@ -78,12 +78,23 @@
 }
 
 .lap-button {
-  background-color: var(--lap-btn-bg-color);
+  background-color: var(--reset-btn-bg-color);
 } 
 
+.lap-button:disabled {
+  background-color: var(--lap-btn-bg-color);
+}
+
+.lap-button:active {
+  background-color: var(--reset-btn-active-color);
+}
 .start-button {
   background-color: var(--start-btn-bg-color);
   color: var(--start-btn-text-color);
+}
+
+.start-button:active {
+  background-color: var(--start-btn-active-color);
 }
 
 .reset-button {
@@ -91,9 +102,17 @@
   color: var(--reset-btn-text-color);
 }
 
+.reset-button:active {
+  background-color: var(--reset-btn-active-color);
+}
+
 .stop-button {
   background-color: var(--stop-btn-bg-color);
   color: var(--stop-btn-text-color);
+}
+
+.stop-button:active {
+  background-color: var(--stop-btn-active-color);
 }
 
 .lap-table-container {
