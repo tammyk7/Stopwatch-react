@@ -7,7 +7,7 @@ function App() {
 const [elapsedTime, setElapsedTime] = useState(0)
 const [isRunning, setIsRunning] = useState(false)
 const [lapData, setLapData] = useState({
-  laps: [{lapNumber: 0, lapTime: 0}],
+  laps: [{lapNumber: 1, lapTime:0}],
   totalLapTime: 0,
   minLap: [],
   maxLap: []
@@ -21,38 +21,58 @@ useEffect(() => {
   }
 }, [isRunning])
 
-// useEffect(() => {
-//   // update running lap
-//   // lapData.laps = []
-// }, [elapsedTime])
-
-// setLapData(prevLapData => ({
-//   ...prevLapData,
-//   laps: [ 34, ...prevLapData.laps, 323, 45],
-//   totalLapTime: elapsedTime - lapData.laps[...]
-
-// }))
-
-const firstLap = () => {
-  setLapData(prevLapData => ({
-    ...prevLapData,
-    laps: [...prevLapData.laps[0]],
-    totalLapTime: elapsedTime,
-  }))
-}
-// console.log(lapData)
-
-const startStopButtonText = isRunning ? 'Stop' : 'Start'
-const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
-const lapResetButtonText = (isRunning || elapsedTime === 0) ? 'Lap' : 'Reset'
-const toggleTimer = () => setIsRunning(!isRunning)
-const lapResetButtonAction = () => (lapResetButtonText === 'Reset') ? resetTimer() : firstLap()
-const isLapButtonDisabled = !isRunning && elapsedTime === 0
+useEffect(() => {
+  if (elapsedTime > 0) {
+    setLapData(prevLapData => {
+      const currentRunningLap = prevLapData.laps[0]
+      const newRunningLap = {
+        ...currentRunningLap,
+        lapTime: elapsedTime - lapData.totalLapTime
+      }
+      return {
+        ...prevLapData,
+        laps: [newRunningLap, ...prevLapData.laps.slice(1)]
+      }
+    })
+  }
+}, [elapsedTime])
 
 const resetTimer = () => {
   setIsRunning(false)
   setElapsedTime(0)
+  setLapData(
+    {
+      laps: [{lapNumber: 1, lapTime:0}],
+      totalLapTime: 0,
+      minLap: [],
+      maxLap: []
+    })
 }
+
+const addLap = () => {
+  console.log('YOOOO')
+  
+  setLapData(prevLapData => {
+    const currentLapTime = elapsedTime - lapData.totalLapTime
+    const newRunningLap = {
+      lapNumber: 1,
+      lapTime: currentLapTime
+    }
+    return {
+      ...prevLapData,
+      laps: [newRunningLap, ...prevLapData.laps],
+      totalLapTime: currentLapTime + lapData.totalLapTime
+    }
+  })
+}
+
+const startStopButtonText = isRunning ? 'Stop' : 'Start'
+const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
+const lapResetButtonText = (isRunning || elapsedTime === 0) ? 'Lap' : 'Reset'
+const isLapButtonDisabled = !isRunning && elapsedTime === 0
+
+const toggleTimer = () => setIsRunning(!isRunning)
+const lapResetButtonAction = () => (lapResetButtonText === 'Reset') ? resetTimer() : addLap()
 
 return (
   <div>
@@ -72,11 +92,16 @@ return (
         </div>
         <div className="lap-table-container">
           <table className='lap-table 'id="lapTable">
-            <tbody>
-              <tr className='lap-row'>
-                <td>Lap 1</td>
-                <td>00:00.00</td>
-              </tr>
+            <tbody className='lap-table-body'>
+              {(elapsedTime > 0) ? 
+              lapData.laps.map((lap, i) => {
+                return (
+                <tr className='lap-row'>
+                  <td>Lap {lap.lapNumber + i}</td>
+                  <td>{formatTime(lap.lapTime)}</td> 
+                </tr>)
+              }) : null
+              }
             </tbody>
           </table>
         </div>
@@ -84,6 +109,5 @@ return (
     </div>
   </div>
 )
-};
-
+}
 export default App
