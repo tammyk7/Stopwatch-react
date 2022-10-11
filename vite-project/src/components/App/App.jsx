@@ -92,7 +92,7 @@ return (
         </div>
         <div className="lap-table-container">
           <table className='lap-table 'id="lapTable">
-            <tbody className='lap-table-body'>
+            <tbody>
               {(elapsedTime > 0) ? 
               lapData.laps.map((lap, i) => {
                 return (

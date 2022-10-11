@@ -135,12 +135,6 @@
   font-variant: tabular-nums;
 }
 
-/* .lap-table-body { */
-  /* display: flex;
-  flex-direction: column-reverse; */
-  /* overflow: auto; */
-/* } */
-
 .lap-table {
   width: 100%;
 }
