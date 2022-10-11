@@ -50,7 +50,11 @@ useEffect(() => {
 // 3. if lap is determined to be min or max, add respective class for font color
 
 const firstLap = () => {
- console.log(lapData)
+  setLapData((prevLapData) => ({
+    ...prevLapData,
+    laps: [...prevLapData.laps[0]],
+    totalLapTime: elapsedTime,
+  }));
 
 }
 
