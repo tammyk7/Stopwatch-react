@@ -21,18 +21,6 @@ useEffect(() => {
   }
 }, [isRunning])
 
-const resetTimer = () => {
-  setIsRunning(false)
-  setElapsedTime(0)
-  setLapData(
-    {
-      laps: [],
-      totalLapTime: 0,
-      minLap: [],
-      maxLap: []
-    })
-}
-
 const addLap = () => {
   setLapData(prevLapData => {
     const currentLapTime = elapsedTime - lapData.totalLapTime
@@ -43,9 +31,22 @@ const addLap = () => {
     return {
       ...prevLapData,
       laps: [...prevLapData.laps, newRunningLap],
-      totalLapTime: currentLapTime + lapData.totalLapTime
+      totalLapTime: currentLapTime + lapData.totalLapTime,
+      minLap: []
     }
   })
+}
+
+const resetTimer = () => {
+  setIsRunning(false)
+  setElapsedTime(0)
+  setLapData(
+    {
+      laps: [],
+      totalLapTime: 0,
+      minLap: [],
+      maxLap: []
+    })
 }
 
 const startStopButtonText = isRunning ? 'Stop' : 'Start'
@@ -87,10 +88,10 @@ return (
               }
               {
                 elapsedTime > 0 &&
-                  <tr className='lap-row'>
-                    <td>Lap {currentLapNumber}</td>
-                    <td>{formatTime(currentLapTimeRunning)}</td>
-                  </tr>
+                <tr className='lap-row'>
+                  <td>Lap {currentLapNumber}</td>
+                  <td>{formatTime(currentLapTimeRunning)}</td>
+                </tr>
               }
             </tbody>
           </table>
