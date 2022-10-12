@@ -21,22 +21,6 @@ useEffect(() => {
   }
 }, [isRunning])
 
-// useEffect(() => {
-//   if (elapsedTime > 0) {
-//     setLapData(prevLapData => {
-//       const currentRunningLap = prevLapData.laps[0]
-//       const newRunningLap = {
-//         ...currentRunningLap,
-//         lapTime: elapsedTime - lapData.totalLapTime
-//       }
-//       return {
-//         ...prevLapData,
-//         laps: [newRunningLap, ...prevLapData.laps.slice(1)]
-//       }
-//     })
-//   }
-// }, [elapsedTime])
-
 const resetTimer = () => {
   setIsRunning(false)
   setElapsedTime(0)
