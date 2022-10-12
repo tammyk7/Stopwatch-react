@@ -25,14 +25,12 @@ const addLap = () => {
   setLapData(prevLapData => {
     const currentLapTime = elapsedTime - lapData.totalLapTime
     const newRunningLap = {
-      lapNumber: 1,
       lapTime: currentLapTime
     }
     return {
       ...prevLapData,
       laps: [...prevLapData.laps, newRunningLap],
-      totalLapTime: currentLapTime + lapData.totalLapTime,
-      minLap: []
+      totalLapTime: currentLapTime + lapData.totalLapTime
     }
   })
 }
@@ -54,7 +52,7 @@ const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-but
 const lapResetButtonText = (isRunning || elapsedTime === 0) ? 'Lap' : 'Reset'
 const isLapButtonDisabled = !isRunning && elapsedTime === 0
 const currentLapNumber = lapData.laps.length + 1
-const currentLapTimeRunning = elapsedTime - lapData.totalLapTime
+const runningLapTime = elapsedTime - lapData.totalLapTime
 
 const toggleTimer = () => setIsRunning(!isRunning)
 const lapResetButtonAction = () => (lapResetButtonText === 'Reset') ? resetTimer() : addLap()
@@ -77,11 +75,10 @@ return (
           <table className='lap-table'>
             <tbody className='table-body'>
               {
-                lapData.laps && 
                 lapData.laps.map((lap, i) => {
                   return (
-                  <tr key={lap.lapNumber + i} className='lap-row'>
-                    <td>Lap {lap.lapNumber + i}</td>
+                  <tr key={i} className='lap-row'>
+                    <td>Lap {i + 1}</td>
                     <td>{formatTime(lap.lapTime)}</td> 
                   </tr>)
                 })
@@ -90,7 +87,7 @@ return (
                 elapsedTime > 0 &&
                 <tr className='lap-row'>
                   <td>Lap {currentLapNumber}</td>
-                  <td>{formatTime(currentLapTimeRunning)}</td>
+                  <td>{formatTime(runningLapTime)}</td>
                 </tr>
               }
             </tbody>
