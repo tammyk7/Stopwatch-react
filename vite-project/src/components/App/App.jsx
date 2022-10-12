@@ -22,19 +22,30 @@ useEffect(() => {
 }, [isRunning])
 
 const addLap = () => {
-  setLapData(prevLapData => {
-    const currentLapTime = elapsedTime - lapData.totalLapTime
-    const newLap = {
-      lapTime: currentLapTime
+  const currentLapTime = elapsedTime - lapData.totalLapTime
+  const newLapData = {totalLapTime: currentLapTime + lapData.totalLapTime}
+
+  if (lapData.laps.length == 1) {
+    if (currentLapTime > lapData.laps[0]) {
+        newLapData.maxLap = currentLapTime 
+        newLapData.minLap = lapData.laps[0]
+      }
+    if (currentLapTime < lapData.laps[0]) {
+        newLapData.minLap = currentLapTime 
+        newLapData.maxLap = lapData.laps[0]
+      }
     }
-    return {
-      ...prevLapData,
-      laps: [...prevLapData.laps, newLap],
-      totalLapTime: currentLapTime + lapData.totalLapTime,
-      minLap: currentLapTime < prevLapData.minLap ? currentLapTime : prevLapData.minLap,
-      maxLap: currentLapTime > prevLapData.maxLap ? currentLapTime : prevLapData.maxLap
-    }
-  })
+    else if (lapData.laps.length >= 2) {
+        newLapData.maxLap = currentLapTime > lapData.maxLap ? currentLapTime : lapData.maxLap
+        newLapData.minLap = currentLapTime < lapData.minLap ? currentLapTime : lapData.minLap
+    }  
+    setLapData(prevLapData => {
+      return {
+        ...prevLapData,
+        laps: [...prevLapData.laps, currentLapTime],
+        ...newLapData,
+      }
+    })
 }
 
 const resetTimer = () => {
@@ -58,6 +69,16 @@ const runningLapTime = elapsedTime - lapData.totalLapTime
 
 const toggleTimer = () => setIsRunning(!isRunning)
 const lapResetButtonAction = () => (lapResetButtonText === 'Reset') ? resetTimer() : addLap()
+const lapLength = (lapTime) => {
+  if (lapData.minLap === lapTime) {
+    return 'fastest-lap'
+  }
+  else if (lapData.maxLap === lapTime) {
+    return 'slowest-lap'
+  } else {
+    return ''
+  }
+}
 
 return (
   <div>
@@ -77,13 +98,12 @@ return (
           <table className='lap-table'>
             <tbody className='table-body'>
               {
-                lapData.laps.map((lap, i) => {
+                lapData.laps.map((lapTime, i) => {
                   return (
                   <tr key={i} 
-                      className= {`lap-row ${lapData.minLap === lap.lapTime && 'fastest-lap'} 
-                      ${lapData.maxLap === lap.lapTime && 'slowest-lap'}`}>
+                      className= {`lap-row ${lapLength(lapTime)}`}>
                     <td>Lap {i + 1}</td>
-                    <td>{formatTime(lap.lapTime)}</td> 
+                    <td>{formatTime(lapTime)}</td> 
                   </tr>)
                 })
               }
