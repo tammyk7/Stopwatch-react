@@ -30,7 +30,9 @@ const addLap = () => {
     return {
       ...prevLapData,
       laps: [...prevLapData.laps, newRunningLap],
-      totalLapTime: currentLapTime + lapData.totalLapTime
+      totalLapTime: currentLapTime + lapData.totalLapTime,
+      // maxLap: currentLapTime > lapData.maxLap ?  ,
+      // minLap: currentLapTime < lapData.minLap ? 
     }
   })
 }
