@@ -143,3 +143,11 @@
   display: flex;
   flex-direction: column-reverse
 }
+
+.fastest-lap>td {
+  color: green;
+}
+
+.slowest-lap>td {
+  color: red;
+}

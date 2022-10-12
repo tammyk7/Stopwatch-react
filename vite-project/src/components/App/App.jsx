@@ -9,8 +9,8 @@ const [isRunning, setIsRunning] = useState(false)
 const [lapData, setLapData] = useState({
   laps: [],
   totalLapTime: 0,
-  minLap: {time: Infinity},
-  maxLap: {time: 0}
+  minLap: Infinity,
+  maxLap: 0
 })
 
 useEffect(() => {
@@ -30,7 +30,9 @@ const addLap = () => {
     return {
       ...prevLapData,
       laps: [...prevLapData.laps, newLap],
-      totalLapTime: currentLapTime + lapData.totalLapTime
+      totalLapTime: currentLapTime + lapData.totalLapTime,
+      minLap: currentLapTime < prevLapData.minLap ? currentLapTime : prevLapData.minLap,
+      maxLap: currentLapTime > prevLapData.maxLap ? currentLapTime : prevLapData.maxLap
     }
   })
 }
@@ -42,8 +44,8 @@ const resetTimer = () => {
     {
       laps: [],
       totalLapTime: 0,
-      minLap: {},
-      maxLap: {}
+      minLap: Infinity,
+      maxLap: 0
     })
 }
 
@@ -77,7 +79,9 @@ return (
               {
                 lapData.laps.map((lap, i) => {
                   return (
-                  <tr key={i} className='lap-row'>
+                  <tr key={i} 
+                      className= {`lap-row ${lapData.minLap === lap.lapTime && 'fastest-lap'} 
+                      ${lapData.maxLap === lap.lapTime && 'slowest-lap'}`}>
                     <td>Lap {i + 1}</td>
                     <td>{formatTime(lap.lapTime)}</td> 
                   </tr>)
