@@ -7,7 +7,7 @@ function App() {
 const [elapsedTime, setElapsedTime] = useState(0)
 const [isRunning, setIsRunning] = useState(false)
 const [lapData, setLapData] = useState({
-  laps: [{lapNumber: 1, lapTime:0}],
+  laps: [],
   totalLapTime: 0,
   minLap: [],
   maxLap: []
@@ -21,21 +21,21 @@ useEffect(() => {
   }
 }, [isRunning])
 
-useEffect(() => {
-  if (elapsedTime > 0) {
-    setLapData(prevLapData => {
-      const currentRunningLap = prevLapData.laps[0]
-      const newRunningLap = {
-        ...currentRunningLap,
-        lapTime: elapsedTime - lapData.totalLapTime
-      }
-      return {
-        ...prevLapData,
-        laps: [newRunningLap, ...prevLapData.laps.slice(1)]
-      }
-    })
-  }
-}, [elapsedTime])
+// useEffect(() => {
+//   if (elapsedTime > 0) {
+//     setLapData(prevLapData => {
+//       const currentRunningLap = prevLapData.laps[0]
+//       const newRunningLap = {
+//         ...currentRunningLap,
+//         lapTime: elapsedTime - lapData.totalLapTime
+//       }
+//       return {
+//         ...prevLapData,
+//         laps: [newRunningLap, ...prevLapData.laps.slice(1)]
+//       }
+//     })
+//   }
+// }, [elapsedTime])
 
 const resetTimer = () => {
   setIsRunning(false)
@@ -50,8 +50,6 @@ const resetTimer = () => {
 }
 
 const addLap = () => {
-  console.log('YOOOO')
-  
   setLapData(prevLapData => {
     const currentLapTime = elapsedTime - lapData.totalLapTime
     const newRunningLap = {
@@ -60,7 +58,7 @@ const addLap = () => {
     }
     return {
       ...prevLapData,
-      laps: [newRunningLap, ...prevLapData.laps],
+      laps: [...prevLapData.laps, newRunningLap],
       totalLapTime: currentLapTime + lapData.totalLapTime
     }
   })
@@ -79,28 +77,34 @@ return (
     <div className="wrapper">
       <div className="main">
         <div className="timer-container">
-          <span id="timer">{formatTime(elapsedTime)}</span>
+          <span>{formatTime(elapsedTime)}</span>
         </div>
         <div className="button-container">
-          <button className="round-button lap-button" 
-                  id="lapResetButton" 
+          <button className="round-button lap-button"  
                   onClick={lapResetButtonAction}
                   disabled={isLapButtonDisabled}>{lapResetButtonText}</button> 
           <button className={startStopButtonColor} 
-                  id="startStopButton" 
                   onClick={toggleTimer}>{startStopButtonText}</button>
         </div>
         <div className="lap-table-container">
-          <table className='lap-table 'id="lapTable">
-            <tbody>
-              {(elapsedTime > 0) ? 
-              lapData.laps.map((lap, i) => {
-                return (
-                <tr className='lap-row'>
-                  <td>Lap {lap.lapNumber + i}</td>
-                  <td>{formatTime(lap.lapTime)}</td> 
-                </tr>)
-              }) : null
+          <table className='lap-table'>
+            <tbody className='table-body'>
+              {
+                lapData.laps && 
+                lapData.laps.map((lap, i) => {
+                  return (
+                  <tr key={lap.lapNumber + i} className='lap-row'>
+                    <td>Lap {lap.lapNumber + i}</td>
+                    <td>{formatTime(lap.lapTime)}</td> 
+                  </tr>)
+                })
+              }
+              {
+                elapsedTime > 0 &&
+                  <tr className='lap-row'>
+                    <td>Lap {lapData.laps.length + 1}</td>
+                    <td>{formatTime(elapsedTime - lapData.totalLapTime)}</td>
+                  </tr>
               }
             </tbody>
           </table>

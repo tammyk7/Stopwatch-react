@@ -138,3 +138,8 @@
 .lap-table {
   width: 100%;
 }
+
+.table-body {
+  display: flex;
+  flex-direction: column-reverse
+}
