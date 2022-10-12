@@ -26,7 +26,7 @@ const resetTimer = () => {
   setElapsedTime(0)
   setLapData(
     {
-      laps: [{lapNumber: 1, lapTime:0}],
+      laps: [],
       totalLapTime: 0,
       minLap: [],
       maxLap: []
@@ -52,6 +52,8 @@ const startStopButtonText = isRunning ? 'Stop' : 'Start'
 const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
 const lapResetButtonText = (isRunning || elapsedTime === 0) ? 'Lap' : 'Reset'
 const isLapButtonDisabled = !isRunning && elapsedTime === 0
+const currentLapNumber = lapData.laps.length + 1
+const currentLapTimeRunning = elapsedTime - lapData.totalLapTime
 
 const toggleTimer = () => setIsRunning(!isRunning)
 const lapResetButtonAction = () => (lapResetButtonText === 'Reset') ? resetTimer() : addLap()
@@ -86,8 +88,8 @@ return (
               {
                 elapsedTime > 0 &&
                   <tr className='lap-row'>
-                    <td>Lap {lapData.laps.length + 1}</td>
-                    <td>{formatTime(elapsedTime - lapData.totalLapTime)}</td>
+                    <td>Lap {currentLapNumber}</td>
+                    <td>{formatTime(currentLapTimeRunning)}</td>
                   </tr>
               }
             </tbody>
