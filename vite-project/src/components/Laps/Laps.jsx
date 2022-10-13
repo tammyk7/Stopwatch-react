@@ -33,7 +33,7 @@ export default function Laps({ lapData, elapsedTime }) {
               </tr>)})
           }
           {
-            elapsedTime > 0 &&
+            (elapsedTime > 0) &&
               <tr className='lap-row'>
                 <td>Lap {currentLapNumber}</td>
                 <td>{formatTime(runningLapTime)}</td>
