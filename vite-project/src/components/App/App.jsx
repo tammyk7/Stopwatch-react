@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { formatTime } from "../utils/utils"
-import "./App.css"
 import { Buttons } from "../Buttons/Buttons"
-import Laps from "../Laps/Laps"
+import Laps  from "../Laps/Laps"
+import "./App.css"
 
 function App() {
   const [elapsedTime, setElapsedTime] = useState(0)
@@ -17,12 +17,8 @@ function App() {
   useEffect(() => {
     if (isRunning) {
       const startTime = Date.now() - elapsedTime
-      const interval = setInterval(
-        () => setElapsedTime(Date.now() - startTime),
-        10
-      )
-      return () => clearInterval(interval)
-    }
+      const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10)
+      return () => clearInterval(interval)}
   }, [isRunning])
 
   const addLap = () => {
@@ -32,14 +28,8 @@ function App() {
         ...prevLapData,
         laps: [...prevLapData.laps, currentLapTime],
         totalLapTime: currentLapTime + lapData.totalLapTime,
-        minLap:
-          currentLapTime < prevLapData.minLap
-            ? currentLapTime
-            : prevLapData.minLap,
-        maxLap:
-          currentLapTime > prevLapData.maxLap
-            ? currentLapTime
-            : prevLapData.maxLap,
+        minLap: currentLapTime < prevLapData.minLap ? currentLapTime : prevLapData.minLap,
+        maxLap: currentLapTime > prevLapData.maxLap ? currentLapTime : prevLapData.maxLap,
       }
     })
   }
