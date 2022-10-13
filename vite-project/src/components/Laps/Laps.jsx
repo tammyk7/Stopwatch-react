@@ -9,9 +9,11 @@ export default function Laps({ lapData, elapsedTime }) {
     if (lapData.laps.length >= 2) {
       if (lapTime === lapData.minLap) {
         return 'fastest-lap'
-      } else if (lapTime === lapData.maxLap) {
+      } 
+      else if (lapTime === lapData.maxLap) {
         return 'slowest-lap'
-      } else {
+      } 
+      else {
         return ''
       }
     }
