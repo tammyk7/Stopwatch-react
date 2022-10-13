@@ -11,7 +11,7 @@ function App() {
     laps: [],
     totalLapTime: 0,
     minLap: Infinity,
-    maxLap: 0,
+    maxLap: 0
   })
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function App() {
       laps: [],
       totalLapTime: 0,
       minLap: Infinity,
-      maxLap: 0,
+      maxLap: 0
       }
     )
   }
