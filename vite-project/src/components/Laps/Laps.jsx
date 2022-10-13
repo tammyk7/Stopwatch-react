@@ -27,15 +27,15 @@ export default function Laps({ lapData, elapsedTime }) {
                   className={`lap-row ${lapLength(lapTime)}`}>
                 <td>Lap {i + 1}</td>
                 <td>{formatTime(lapTime)}</td>
-              </tr>
-            )
-          })}
-          {elapsedTime > 0 && (
+              </tr>)})
+          }
+          {
+          elapsedTime > 0 && (
             <tr className='lap-row'>
               <td>Lap {currentLapNumber}</td>
               <td>{formatTime(runningLapTime)}</td>
-            </tr>
-          )}
+            </tr>)
+          }
         </tbody>
       </table>
     </div>
