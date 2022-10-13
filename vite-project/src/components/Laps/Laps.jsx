@@ -6,16 +6,13 @@ export default function Laps({ lapData, elapsedTime }) {
   const runningLapTime = elapsedTime - lapData.totalLapTime
 
   const lapLength = (lapTime) => {
-    if (lapData.laps.length >= 2) {
-      if (lapTime === lapData.minLap) {
+    switch (lapData.laps.length >= 2) {
+      case (lapTime === lapData.minLap):
         return 'fastest-lap'
-      } 
-      else if (lapTime === lapData.maxLap) {
+      case (lapTime === lapData.maxLap):
         return 'slowest-lap'
-      } 
-      else {
+      default: 
         return ''
-      }
     }
   }
 
