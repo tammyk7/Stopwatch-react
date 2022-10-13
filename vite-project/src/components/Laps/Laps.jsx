@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatTime } from '../App/utils'
+import { formatTime } from '../utils/utils'
 
 export default function Laps({lapData, elapsedTime}) {
 
