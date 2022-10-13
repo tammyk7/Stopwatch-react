@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const Buttons = ({ isRunning, elapsedTime, toggleTimer, lapResetButtonAction }) => {
-
   const startStopButtonText = isRunning ? 'Stop' : 'Start'
   const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
   const lapResetButtonText = isRunning || elapsedTime === 0 ? 'Lap' : 'Reset'

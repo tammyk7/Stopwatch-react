@@ -29,7 +29,7 @@ function App() {
         laps: [...prevLapData.laps, currentLapTime],
         totalLapTime: currentLapTime + lapData.totalLapTime,
         minLap: currentLapTime < prevLapData.minLap ? currentLapTime : prevLapData.minLap,
-        maxLap: currentLapTime > prevLapData.maxLap ? currentLapTime : prevLapData.maxLap,
+        maxLap: currentLapTime > prevLapData.maxLap ? currentLapTime : prevLapData.maxLap
       }
     })
   }
