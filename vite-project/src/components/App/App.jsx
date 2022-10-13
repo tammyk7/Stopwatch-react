@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Buttons } from '../Buttons/Buttons'
-import Laps  from '../Laps/Laps'
 import { formatTime } from '../utils/utils'
+import Laps  from '../Laps/Laps'
 import './App.css'
 
 function App() {
