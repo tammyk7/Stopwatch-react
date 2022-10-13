@@ -26,7 +26,7 @@ function App() {
   }, [isRunning])
 
   const addLap = () => {
-    const currentLapTime = elapsedTime - lapData.totalLapTime;
+    const currentLapTime = elapsedTime - lapData.totalLapTime
     setLapData((prevLapData) => {
       return {
         ...prevLapData,
