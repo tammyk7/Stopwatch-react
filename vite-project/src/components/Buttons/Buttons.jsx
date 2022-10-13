@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export const Buttons = ({isRunning,elapsedTime,toggleTimer,lapResetButtonAction,}) => {
 
@@ -12,11 +12,12 @@ export const Buttons = ({isRunning,elapsedTime,toggleTimer,lapResetButtonAction,
       <button
         className="round-button lap-button"
         onClick={lapResetButtonAction}
-        disabled={isLapButtonDisabled}
-      >
+        disabled={isLapButtonDisabled}>
         {lapResetButtonText}
       </button>
-      <button className={startStopButtonColor} onClick={toggleTimer}>
+      <button 
+        className={startStopButtonColor} 
+        onClick={toggleTimer}>
         {startStopButtonText}
       </button>
     </div>

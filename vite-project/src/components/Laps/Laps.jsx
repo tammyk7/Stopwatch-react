@@ -1,16 +1,16 @@
-import React from "react";
+import React from "react"
 import { formatTime } from "../utils/utils"
 
 export default function Laps({ lapData, elapsedTime }) {
-  const currentLapNumber = lapData.laps.length + 1;
-  const runningLapTime = elapsedTime - lapData.totalLapTime;
+  const currentLapNumber = lapData.laps.length + 1
+  const runningLapTime = elapsedTime - lapData.totalLapTime
 
   const lapLength = (lapTime) => {
     if (lapData.laps.length >= 2) {
       if (lapTime === lapData.minLap) {
-        return "fastest-lap";
+        return "fastest-lap"
       } else if (lapTime === lapData.maxLap) {
-        return "slowest-lap";
+        return "slowest-lap"
       } else {
         return ""
       }
@@ -23,11 +23,12 @@ export default function Laps({ lapData, elapsedTime }) {
         <tbody className="table-body">
           {lapData.laps.map((lapTime, i) => {
             return (
-              <tr key={i} className={`lap-row ${lapLength(lapTime)}`}>
+              <tr key={i} 
+                  className={`lap-row ${lapLength(lapTime)}`}>
                 <td>Lap {i + 1}</td>
                 <td>{formatTime(lapTime)}</td>
               </tr>
-            );
+            )
           })}
           {elapsedTime > 0 && (
             <tr className="lap-row">

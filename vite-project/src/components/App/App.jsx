@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { formatTime } from "../utils/utils";
-import "./App.css";
-import { Buttons } from "../Buttons/Buttons";
-import Laps from "../Laps/Laps";
+import { useEffect, useState } from "react"
+import { formatTime } from "../utils/utils"
+import "./App.css"
+import { Buttons } from "../Buttons/Buttons"
+import Laps from "../Laps/Laps"
 
 function App() {
   const [elapsedTime, setElapsedTime] = useState(0)
@@ -16,12 +16,12 @@ function App() {
 
   useEffect(() => {
     if (isRunning) {
-      const startTime = Date.now() - elapsedTime;
+      const startTime = Date.now() - elapsedTime
       const interval = setInterval(
         () => setElapsedTime(Date.now() - startTime),
         10
-      );
-      return () => clearInterval(interval);
+      )
+      return () => clearInterval(interval)
     }
   }, [isRunning])
 
@@ -45,8 +45,8 @@ function App() {
   }
 
   const resetTimer = () => {
-    setIsRunning(false);
-    setElapsedTime(0);
+    setIsRunning(false)
+    setElapsedTime(0)
     setLapData({
       laps: [],
       totalLapTime: 0,
@@ -55,7 +55,7 @@ function App() {
     })
   }
 
-  const toggleTimer = () => setIsRunning(!isRunning);
+  const toggleTimer = () => setIsRunning(!isRunning)
   const lapResetButtonAction = () => (!isRunning ? resetTimer() : addLap())
 
   return (
@@ -69,9 +69,10 @@ function App() {
             isRunning={isRunning}
             elapsedTime={elapsedTime}
             toggleTimer={toggleTimer}
-            lapResetButtonAction={lapResetButtonAction}
-          />
-          <Laps lapData={lapData} elapsedTime={elapsedTime} />
+            lapResetButtonAction={lapResetButtonAction}/>
+          <Laps 
+            lapData={lapData} 
+            elapsedTime={elapsedTime}/>
         </div>
       </div>
     </div>
