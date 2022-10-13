@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { formatTime } from '../utils/utils'
+import { formatTime } from './utils'
 import './App.css'
 import { Buttons } from '../Buttons/Buttons'
 import Laps from '../Laps/Laps'
@@ -64,8 +64,8 @@ return (
         toggleTimer={toggleTimer}
         lapResetButtonAction={lapResetButtonAction}/>
       <Laps
-      lapData={lapData}
-      elapsedTime={elapsedTime}/>
+        lapData={lapData}
+        elapsedTime={elapsedTime}/>
       </div>
     </div>
   </div>
