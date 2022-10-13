@@ -37,16 +37,18 @@ function App() {
   const resetTimer = () => {
     setIsRunning(false)
     setElapsedTime(0)
-    setLapData({
+    setLapData(
+      {
       laps: [],
       totalLapTime: 0,
       minLap: Infinity,
       maxLap: 0,
-    })
+      }
+    )
   }
 
   const toggleTimer = () => setIsRunning(!isRunning)
-  const lapResetButtonAction = () => (!isRunning ? resetTimer() : addLap())
+  const lapResetButtonAction = () => !isRunning ? resetTimer() : addLap()
 
   return (
     <div>

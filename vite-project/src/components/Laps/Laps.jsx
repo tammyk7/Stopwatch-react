@@ -21,7 +21,8 @@ export default function Laps({ lapData, elapsedTime }) {
     <div className='lap-table-container'>
       <table className='lap-table'>
         <tbody className='table-body'>
-          {lapData.laps.map((lapTime, i) => {
+          {
+            lapData.laps.map((lapTime, i) => {
             return (
               <tr key={i} 
                   className={`lap-row ${lapLength(lapTime)}`}>
@@ -30,11 +31,11 @@ export default function Laps({ lapData, elapsedTime }) {
               </tr>)})
           }
           {
-          elapsedTime > 0 && (
-            <tr className='lap-row'>
-              <td>Lap {currentLapNumber}</td>
-              <td>{formatTime(runningLapTime)}</td>
-            </tr>)
+            elapsedTime > 0 &&
+              <tr className='lap-row'>
+                <td>Lap {currentLapNumber}</td>
+                <td>{formatTime(runningLapTime)}</td>
+              </tr>
           }
         </tbody>
       </table>
