@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
-import { formatTime } from "../utils/utils"
-import { Buttons } from "../Buttons/Buttons"
-import Laps  from "../Laps/Laps"
-import "./App.css"
+import { useEffect, useState } from 'react'
+import { formatTime } from '../utils/utils'
+import { Buttons } from '../Buttons/Buttons'
+import Laps  from '../Laps/Laps'
+import './App.css'
 
 function App() {
   const [elapsedTime, setElapsedTime] = useState(0)
@@ -50,9 +50,9 @@ function App() {
 
   return (
     <div>
-      <div className="wrapper">
-        <div className="main">
-          <div className="timer-container">
+      <div className='wrapper'>
+        <div className='main'>
+          <div className='timer-container'>
             <span>{formatTime(elapsedTime)}</span>
           </div>
           <Buttons
