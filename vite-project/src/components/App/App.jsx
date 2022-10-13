@@ -5,20 +5,22 @@ import Laps  from '../Laps/Laps'
 import './App.css'
 
 function App() {
+  const initialLapData = {
+      laps: [],
+      totalLapTime: 0,
+      minLap: Number.MAX_VALUE,
+      maxLap: 0
+  }
   const [elapsedTime, setElapsedTime] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
-  const [lapData, setLapData] = useState({
-    laps: [],
-    totalLapTime: 0,
-    minLap: Infinity,
-    maxLap: 0
-  })
+  const [lapData, setLapData] = useState(initialLapData)
 
   useEffect(() => {
     if (isRunning) {
       const startTime = Date.now() - elapsedTime
       const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10)
-      return () => clearInterval(interval)}
+      return () => clearInterval(interval)
+    }
   }, [isRunning])
 
   const addLap = () => {
@@ -28,8 +30,8 @@ function App() {
         ...prevLapData,
         laps: [...prevLapData.laps, currentLapTime],
         totalLapTime: currentLapTime + lapData.totalLapTime,
-        minLap: currentLapTime < prevLapData.minLap ? currentLapTime : prevLapData.minLap,
-        maxLap: currentLapTime > prevLapData.maxLap ? currentLapTime : prevLapData.maxLap
+        minLap: (currentLapTime < prevLapData.minLap) ? currentLapTime : prevLapData.minLap,
+        maxLap: (currentLapTime > prevLapData.maxLap) ? currentLapTime : prevLapData.maxLap
       }
     })
   }
@@ -37,14 +39,7 @@ function App() {
   const resetTimer = () => {
     setIsRunning(false)
     setElapsedTime(0)
-    setLapData(
-      {
-      laps: [],
-      totalLapTime: 0,
-      minLap: Infinity,
-      maxLap: 0
-      }
-    )
+    setLapData(initialLapData)
   }
 
   const toggleTimer = () => setIsRunning(!isRunning)
