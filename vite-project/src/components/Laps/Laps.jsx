@@ -1,7 +1,7 @@
 import React from 'react'
 import { formatTime } from '../utils/utils'
 
-export default function Laps({ lapData, elapsedTime }) {
+export function Laps({ lapData, elapsedTime }) {
   const currentLapNumber = lapData.laps.length + 1
   const runningLapTime = elapsedTime - lapData.totalLapTime
 

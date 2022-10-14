@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import { Buttons } from '../Buttons/Buttons'
-import { formatTime } from '../utils/utils'
-import Laps  from '../Laps/Laps'
-import { useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import { reducer, initialState } from './StopwatchReducer'
+import { Buttons } from '../Buttons/Buttons'
+import { Laps }  from '../Laps/Laps'
+import { formatTime } from '../utils/utils'
 import './App.css'
 
 function App() {

@@ -8,7 +8,7 @@ export const reducer = (state, action) => {
               totalLapTime: currentLapTime + state.totalLapTime,
               minLap: (currentLapTime < state.minLap) ? currentLapTime : state.minLap,
               maxLap: (currentLapTime > state.maxLap) ? currentLapTime : state.maxLap
-            }
+        }
       case 'resetTimer':
         return {
           ...initialState
@@ -18,20 +18,19 @@ export const reducer = (state, action) => {
           ...state,
           isRunning: !state.isRunning
         }
-      case 'setElapsedTime': {
+      case 'setElapsedTime': 
         return {
           ...state,
           elapsedTime: Date.now() - action.startTime
         }
-      }
     }
-  }
+}
   
-  export const initialState = {
+export const initialState = {
     laps: [],
     totalLapTime: 0,
     minLap: Number.MAX_VALUE,
     maxLap: 0,
-      elapsedTime: 0,
-      isRunning: false
-    }
+    elapsedTime: 0,
+    isRunning: false
+}   
