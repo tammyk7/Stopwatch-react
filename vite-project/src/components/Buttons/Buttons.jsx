@@ -4,7 +4,7 @@ export const Buttons = ({ isRunning, elapsedTime, toggleTimer, lapResetButtonAct
   const startStopButtonText = isRunning ? 'Stop' : 'Start'
   const startStopButtonColor = isRunning ? 'round-button stop-button' : 'round-button start-button'
   const lapResetButtonText = (isRunning || elapsedTime === 0) ? 'Lap' : 'Reset'
-  const isLapButtonDisabled = (!isRunning && elapsedTime) === 0
+  const isLapButtonDisabled = !isRunning && elapsedTime === 0
 
   return (
     <div className='button-container'>

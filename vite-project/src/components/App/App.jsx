@@ -19,7 +19,7 @@ function App() {
   const addLap = () => dispatch({type: Actions.ADD_LAP})
   const resetTimer = () => dispatch({type: Actions.RESET_TIMER})
   const toggleTimer = () => dispatch({type: Actions.TOGGLE_TIMER})
-  const lapResetButtonAction = () => !state.isRunning ? resetTimer() : addLap()
+  const lapResetButtonAction = !state.isRunning ? resetTimer : addLap
 
   return (
     <div>
@@ -32,10 +32,12 @@ function App() {
             isRunning={state.isRunning}
             elapsedTime={state.elapsedTime}
             toggleTimer={toggleTimer}
-            lapResetButtonAction={lapResetButtonAction}/>
+            lapResetButtonAction={lapResetButtonAction}
+          />
           <Laps 
             lapData={state}
-            elapsedTime={state.elapsedTime}/>
+            elapsedTime={state.elapsedTime}
+          />
         </div>
       </div>
     </div>
