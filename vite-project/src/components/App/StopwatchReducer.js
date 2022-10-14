@@ -34,3 +34,10 @@ export const initialState = {
     elapsedTime: 0,
     isRunning: false
 }   
+
+export const Actions = {
+    ADD_LAP: 'addLap',
+    RESET_TIMER: 'resetTimer',
+    TOGGLE_TIMER: 'toggleTimer',
+    SET_ELAPSED_TIME: 'setElapsedTime'
+}

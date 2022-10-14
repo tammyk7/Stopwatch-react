@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react'
-import { reducer, initialState } from './StopwatchReducer'
+import { reducer, initialState, Actions } from './StopwatchReducer'
 import { Buttons } from '../Buttons/Buttons'
 import { Laps }  from '../Laps/Laps'
 import { formatTime } from '../utils/utils'
@@ -11,14 +11,14 @@ function App() {
   useEffect(() => {
       const startTime = Date.now() - state.elapsedTime
       if (state.isRunning) {
-      const interval = setInterval(() => dispatch({type: 'setElapsedTime', startTime}), 10)
+      const interval = setInterval(() => dispatch({type: Actions.SET_ELAPSED_TIME, startTime}), 10)
       return () => clearInterval(interval)
     }
   }, [state.isRunning])
 
-  const addLap = () => dispatch({type: 'addLap'})
-  const resetTimer = () => dispatch({type: 'resetTimer'})
-  const toggleTimer = () => dispatch({type: 'toggleTimer'})
+  const addLap = () => dispatch({type: Actions.ADD_LAP})
+  const resetTimer = () => dispatch({type: Actions.RESET_TIMER})
+  const toggleTimer = () => dispatch({type: Actions.TOGGLE_TIMER})
   const lapResetButtonAction = () => !state.isRunning ? resetTimer() : addLap()
 
   return (
